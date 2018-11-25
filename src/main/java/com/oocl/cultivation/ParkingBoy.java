@@ -39,6 +39,9 @@ public class ParkingBoy {
             return null;
         }
         ParkingLot parkingLot=ticket.getParkingLot();
+        if(!parkingLots.contains(parkingLot)){
+            return null;
+        }
         Car fetchedCar=parkingLot.getCar(ticket);
         if(fetchedCar==null) {
             lastErrorMessage="Unrecognized parking ticket.";
