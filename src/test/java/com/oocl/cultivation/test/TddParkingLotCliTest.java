@@ -359,6 +359,26 @@ public class TddParkingLotCliTest {
         assertEquals("Unrecognized parking ticket.", message);
     }
 
-    
+    //Given parking boy, ticket has been used
+    //When manager tells parking boy to fetch car
+    //Then manager output error msg "Unrecognized parking ticket."
+    @Test
+    void should_manager_query_error_message_for_used_ticket_when_specify_parkingboy_to_park_car() {
+        ParkingLot parkingLot = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+        parkingBoy.fetch(ticket);
+        parkingBoy.fetch(ticket);
+
+        assertEquals(
+                "Unrecognized parking ticket.",
+                parkingBoy.getLastErrorMessage()
+        );
+    }
+
 
 }
