@@ -7,6 +7,7 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -98,6 +99,17 @@ public class TddParkingLotCliTest {
     //Given parking boy, wrong ticket
     //When parking boy fetch car
     //Then parking boy output error msg "Unrecognized parking ticket."
+    @Test
+    void should_query_message_once_the_ticket_is_wrong() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingTicket wrongTicket = new ParkingTicket();
+
+        parkingBoy.fetch(wrongTicket);
+        String message = parkingBoy.getLastErrorMessage();
+
+        assertEquals("Unrecognized parking ticket.", message);
+    }
 
     //Given parking boy, no ticket
     //When parking boy fetch car
