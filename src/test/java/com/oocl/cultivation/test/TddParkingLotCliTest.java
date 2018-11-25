@@ -4,6 +4,7 @@ package com.oocl.cultivation.test;
 import com.oocl.cultivation.*;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -305,7 +306,7 @@ public class TddParkingLotCliTest {
 
         //When
         ParkingTicket parkingTicket = parkingManager.parkCarByParkingBoy(parkingBoy,car);
-        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+        Car fetchedCar = parkingManager.fetchCarByParkingBoy(parkingBoy,parkingTicket);
 
         //Then
         assertSame(parkingLot2,parkingTicket.getParkingLot());
@@ -341,6 +342,8 @@ public class TddParkingLotCliTest {
     //Given manager, parking boy
     //When manager tells parking boy park and parking boy fail to do
     //Then manager should output error msg
+
+
 
 
 }
