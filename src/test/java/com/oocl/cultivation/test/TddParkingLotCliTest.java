@@ -7,6 +7,8 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -20,7 +22,9 @@ public class TddParkingLotCliTest {
         //Given
         Car car = new Car();
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //When
         ParkingTicket parkingTicket = parkingBoy.park(car);
@@ -37,7 +41,9 @@ public class TddParkingLotCliTest {
     @Test
     void should_park_multiple_cars_to_a_parking_lot_and_get_them_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car firstCar = new Car();
         Car secondCar = new Car();
 
@@ -57,9 +63,11 @@ public class TddParkingLotCliTest {
     @Test
     void should_not_fetch_any_car_once_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
-        ParkingTicket wrongTicket = new ParkingTicket();
+        ParkingTicket wrongTicket = new ParkingTicket(parkingLot);
 
         ParkingTicket ticket = parkingBoy.park(car);
 
@@ -73,7 +81,9 @@ public class TddParkingLotCliTest {
     @Test
     void should_not_fetch_any_car_once_ticket_has_been_used() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -89,7 +99,9 @@ public class TddParkingLotCliTest {
     void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         parkingBoy.park(new Car());
 
@@ -102,8 +114,10 @@ public class TddParkingLotCliTest {
     @Test
     void should_query_message_once_the_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket wrongTicket = new ParkingTicket();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingTicket wrongTicket = new ParkingTicket(parkingLot);
 
         parkingBoy.fetch(wrongTicket);
         String message = parkingBoy.getLastErrorMessage();
@@ -117,7 +131,9 @@ public class TddParkingLotCliTest {
     @Test
     void should_query_error_message_for_used_ticket() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -136,7 +152,9 @@ public class TddParkingLotCliTest {
     @Test
     void should_not_fetch_any_car_once_ticket_is_not_provided() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -151,7 +169,9 @@ public class TddParkingLotCliTest {
     @Test
     void should_query_message_once_ticket_is_not_provided() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         parkingBoy.fetch(null);
 
@@ -167,7 +187,9 @@ public class TddParkingLotCliTest {
     void should_get_message_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         parkingBoy.park(new Car());
         parkingBoy.park(new Car());
@@ -178,6 +200,26 @@ public class TddParkingLotCliTest {
     //Given parking boy, parking lot 1 with no position managed by parking boy, parking lot 2 with position managed by parking boy
     //When parking boy park and fetch car
     //Then the car fetched should be fetched from parking lot 2.
+    @Test
+    public void should_park_a_car_to_a_parking_lot_with_enough_space_and_get_it_back() {
+        //Given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        //When
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+
+        //Then
+        assertSame(parkingLot2,parkingTicket.getParkingLot());
+        assertSame(car,fetchedCar);
+
+    }
 
     //Given smart parking boy, parking lot 1 managed by parking boy, parking lot 2 with more empty position managed by parking boy
     //When parking boy park and fetch car
