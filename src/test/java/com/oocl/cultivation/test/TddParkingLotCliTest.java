@@ -301,7 +301,7 @@ public class TddParkingLotCliTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ArrayList<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        ParkingManager parkingManager = new ParkingManager(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(new ArrayList<ParkingLot>(),parkingBoys);
 
         //When
         ParkingTicket parkingTicket = parkingManager.parkCarByParkingBoy(parkingBoy,car);
@@ -316,6 +316,27 @@ public class TddParkingLotCliTest {
     //Given manager, parking lot 1 with no position managed by parking boy, parking lot 2 with position managed by parking boy
     //When manager park and fetch car
     //Then the car fetched should be fetched from parking lot 2.
+    @Test
+    public void should_manager_park_a_car_to_a_parking_lot_with_enough_space_and_get_it_back() {
+        //Given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingManager parkingManager = new ParkingManager(parkingLots,new ArrayList<ParkingBoy>());
+
+        //When
+        ParkingTicket parkingTicket = parkingManager.park(car);
+        Car fetchedCar = parkingManager.fetch(parkingTicket);
+
+        //Then
+        assertSame(parkingLot2,parkingTicket.getParkingLot());
+        assertSame(car,fetchedCar);
+
+    }
+
 
     //Given manager, parking boy
     //When manager tells parking boy park and parking boy fail to do
