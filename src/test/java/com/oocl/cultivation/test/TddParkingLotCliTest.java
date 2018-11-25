@@ -7,6 +7,7 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class TddParkingLotCliTest {
@@ -51,8 +52,23 @@ public class TddParkingLotCliTest {
 
     //Given parking boy, wrong ticket
     //When parking boy fetch car
-    //Then parking boy output error msg "Unrecognized parking ticket."
+    //Then no car should be fetched
+    @Test
+    void should_not_fetch_any_car_once_ticket_is_wrong() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket wrongTicket = new ParkingTicket();
 
+        ParkingTicket ticket = parkingBoy.park(car);
+
+        assertNull(parkingBoy.fetch(wrongTicket));
+        assertSame(car, parkingBoy.fetch(ticket));
+    }
+
+    //Given parking boy, wrong ticket
+    //When parking boy fetch car
+    //Then parking boy output error msg "Unrecognized parking ticket."
 
     //Given parking boy, no ticket
     //When parking boy fetch car
