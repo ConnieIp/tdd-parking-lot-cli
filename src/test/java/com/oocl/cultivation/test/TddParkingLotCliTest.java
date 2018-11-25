@@ -81,6 +81,20 @@ public class TddParkingLotCliTest {
         assertNull(parkingBoy.fetch(ticket));
     }
 
+    //Given parking boy, parking lot with no position, car
+    //When parking boy park the car
+    //Then car should not be parked
+    @Test
+    void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
+        final int capacity = 1;
+        ParkingLot parkingLot = new ParkingLot(capacity);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        parkingBoy.park(new Car());
+
+        assertNull(parkingBoy.park(new Car()));
+    }
+
     //Given parking boy, wrong ticket
     //When parking boy fetch car
     //Then parking boy output error msg "Unrecognized parking ticket."
