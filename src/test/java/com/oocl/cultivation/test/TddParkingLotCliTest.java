@@ -380,5 +380,23 @@ public class TddParkingLotCliTest {
         );
     }
 
+    //Given manger,parking boy, no ticket
+    //When manger tells parking boy to fetch car
+    //Then manager output error msg "Please provide your parking ticket."
+    @Test
+    void should_manager_query_message_once_ticket_is_not_provided_when_specify_parkingboy_to_park_car() {
+        ParkingLot parkingLot = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        parkingBoy.fetch(null);
+
+        assertEquals(
+                "Please provide your parking ticket.",
+                parkingBoy.getLastErrorMessage());
+    }
+
+
 
 }
