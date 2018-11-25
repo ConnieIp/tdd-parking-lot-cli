@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ParkingBoy {
 
-    private final ArrayList<ParkingLot> parkingLots;
+    protected final ArrayList<ParkingLot> parkingLots;
     private String lastErrorMessage;
 
     public ParkingBoy(ArrayList<ParkingLot> parkingLots) {

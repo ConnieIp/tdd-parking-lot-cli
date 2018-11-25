@@ -19,6 +19,11 @@ public class ParkingLot {
         return capacity - cars.size();
     }
 
+    public float getAvailableParkingPositionRate() {
+        return (float)getAvailableParkingPosition()/capacity;
+    }
+
+
     public ParkingTicket addCar(Car car){
         if(getAvailableParkingPosition()==0){
             return null;
