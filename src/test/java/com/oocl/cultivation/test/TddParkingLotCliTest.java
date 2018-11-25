@@ -129,6 +129,17 @@ public class TddParkingLotCliTest {
     //Given parking boy, no ticket
     //When parking boy fetch car
     //Then parking boy output error msg "Please provide your parking ticket."
+    @Test
+    void should_query_message_once_ticket_is_not_provided() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        parkingBoy.fetch(null);
+
+        assertEquals(
+                "Please provide your parking ticket.",
+                parkingBoy.getLastErrorMessage());
+    }
 
     //Given parking boy, parking lot with no position
     //When parking boy fetch car
