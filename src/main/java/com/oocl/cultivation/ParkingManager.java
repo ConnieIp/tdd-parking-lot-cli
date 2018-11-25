@@ -2,10 +2,11 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
-public class ParkingManager {
+public class ParkingManager extends ParkingBoy{
     private final ArrayList<ParkingBoy> parkingBoys;
 
-    public ParkingManager(ArrayList<ParkingBoy> parkingBoys) {
+    public ParkingManager(ArrayList<ParkingLot> parkingLots, ArrayList<ParkingBoy> parkingBoys) {
+        super(parkingLots);
         this.parkingBoys = parkingBoys;
     }
 
