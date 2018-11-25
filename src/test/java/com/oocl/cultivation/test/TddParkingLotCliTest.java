@@ -113,6 +113,21 @@ public class TddParkingLotCliTest {
 
     //Given parking boy, no ticket
     //When parking boy fetch car
+    //Then  no car should be fetched
+    @Test
+    void should_not_fetch_any_car_once_ticket_is_not_provided() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+
+        assertNull(parkingBoy.fetch(null));
+        assertSame(car, parkingBoy.fetch(ticket));
+    }
+
+    //Given parking boy, no ticket
+    //When parking boy fetch car
     //Then parking boy output error msg "Please provide your parking ticket."
 
     //Given parking boy, parking lot with no position
