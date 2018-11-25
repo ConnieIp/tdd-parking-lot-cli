@@ -13,4 +13,8 @@ public class ParkingManager extends ParkingBoy{
     public ParkingTicket parkCarByParkingBoy(ParkingBoy parkingBoy,Car car){
         return parkingBoy.park(car);
     }
+
+    public Car fetchCarByParkingBoy(ParkingBoy parkingBoy,ParkingTicket parkingTicket){
+        return parkingBoy.fetch(parkingTicket);
+    }
 }
