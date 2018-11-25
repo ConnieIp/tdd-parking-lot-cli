@@ -10,9 +10,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        ParkingTicket parkingTicket= new ParkingTicket();
-        parkingLot.addCar(parkingTicket,car);
-        return parkingTicket;
+        return parkingLot.addCar(car);
     }
 
     public Car fetch(ParkingTicket ticket) {
