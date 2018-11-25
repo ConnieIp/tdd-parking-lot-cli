@@ -289,6 +289,29 @@ public class TddParkingLotCliTest {
     //Given manager, parking boy managed by manager, car
     //When manager specify parking boy to park and fetch car
     //Then car should be fetched from parking lot managed by parking boy
+    @Test
+    public void should_manager_specify_parkingboy_to_park_and_fetch_a_car() {
+        //Given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ArrayList<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
+
+        //When
+        ParkingTicket parkingTicket = parkingManager.parkCarByParkingBoy(parkingBoy,car);
+        Car fetchedCar = parkingBoy.fetch(parkingTicket);
+
+        //Then
+        assertSame(parkingLot2,parkingTicket.getParkingLot());
+        assertSame(car,fetchedCar);
+
+    }
 
     //Given manager, parking lot 1 with no position managed by parking boy, parking lot 2 with position managed by parking boy
     //When manager park and fetch car
