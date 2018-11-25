@@ -14,7 +14,11 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
-        return parkingLot.getCar(ticket);
+        Car fetchedCar=parkingLot.getCar(ticket);
+        if(fetchedCar==null) {
+            lastErrorMessage="Unrecognized parking ticket.";
+        }
+        return fetchedCar;
     }
 
     public String getLastErrorMessage() {
