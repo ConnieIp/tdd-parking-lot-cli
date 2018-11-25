@@ -397,6 +397,22 @@ public class TddParkingLotCliTest {
                 parkingBoy.getLastErrorMessage());
     }
 
+    //Given manger,parking boy, parking lot with no position managed by parkingBoy
+    //When manger tells parking boy to fetch car
+    //Then manager output error msg "The parking lot is full."
+    @Test
+    void should_manager_get_message_if_there_is_not_enough_position_when_specify_parkingboy_to_park_car() {
+        final int capacity = 1;
+        ParkingLot parkingLot = new ParkingLot(capacity);
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
+    }
 
 
 }
