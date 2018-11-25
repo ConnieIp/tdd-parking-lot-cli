@@ -160,11 +160,20 @@ public class TddParkingLotCliTest {
                 parkingBoy.getLastErrorMessage());
     }
 
-
-
     //Given parking boy, parking lot with no position
     //When parking boy fetch car
-    //Then parking boy output error msg "Not enough position."
+    //Then parking boy output error msg "The parking lot is full."
+    @Test
+    void should_get_message_if_there_is_not_enough_position() {
+        final int capacity = 1;
+        ParkingLot parkingLot = new ParkingLot(capacity);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
+    }
 
     //Given parking boy, parking lot 1 with no position managed by parking boy, parking lot 2 with position managed by parking boy
     //When parking boy park and fetch car
