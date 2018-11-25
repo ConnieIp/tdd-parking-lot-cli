@@ -10,7 +10,11 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        return parkingLot.addCar(car);
+        ParkingTicket parkingTicket=parkingLot.addCar(car);
+        if(parkingTicket==null){
+            lastErrorMessage="The parking lot is full.";
+        }
+        return parkingTicket;
     }
 
     public Car fetch(ParkingTicket ticket) {
