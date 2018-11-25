@@ -66,6 +66,21 @@ public class TddParkingLotCliTest {
         assertSame(car, parkingBoy.fetch(ticket));
     }
 
+    //Given parking boy, ticket have been used
+    //When parking boy fetch car
+    //Then no car should be fetched
+    @Test
+    void should_not_fetch_any_car_once_ticket_has_been_used() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+        parkingBoy.fetch(ticket);
+
+        assertNull(parkingBoy.fetch(ticket));
+    }
+
     //Given parking boy, wrong ticket
     //When parking boy fetch car
     //Then parking boy output error msg "Unrecognized parking ticket."
