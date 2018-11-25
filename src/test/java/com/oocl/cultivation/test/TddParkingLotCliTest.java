@@ -339,11 +339,26 @@ public class TddParkingLotCliTest {
     }
 
 
-    //Given manager, parking boy
-    //When manager tells parking boy park and parking boy fail to do
-    //Then manager should output error msg
+    //Given manager, parking boy, wrong ticket
+    //When manager tells parking boy to fetch a car
+    //Then manager should output error msg "Unrecognized parking ticket."
+    @Test
+    void should_manager_query_message_once_the_ticket_is_wrong_when_specify_parkingboy_to_park_car() {
+        ParkingLot parkingLot = new ParkingLot();
+        ArrayList<ParkingLot> parkingLots=new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingTicket wrongTicket = new ParkingTicket(parkingLot);
+        ArrayList<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ParkingManager parkingManager = new ParkingManager(new ArrayList<ParkingLot>(),parkingBoys);
 
+        parkingManager.fetchCarByParkingBoy(parkingBoy,wrongTicket);
+        String message = parkingManager.getLastErrorMessage();
 
+        assertEquals("Unrecognized parking ticket.", message);
+    }
 
+    
 
 }
